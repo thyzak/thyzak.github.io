@@ -46,7 +46,7 @@ $( document ).ready(function() {
         			price: vehicleOptions[i].price
         		}
         		var html = template(options);
-        		$('body').append(html);
+        		$('#options-display').html(html);
         		break; 
     		case 'color':
        			var source = $('#color-options-template');
@@ -56,7 +56,7 @@ $( document ).ready(function() {
         			price: colorOptions[i].price
         		}
         		var html = template(options);
-        		$('body').append(html);
+        		$('#options-display').html(html);
         		break; 
         	case 'package':
        			var source = $('#package-options-template');
@@ -66,13 +66,13 @@ $( document ).ready(function() {
         			price: packageOptions[i].price
         		}
         		var html = template(options);
-        		$('body').append(html);
+        		$('#options-display').html(html);
         		break;
         	case 'summary':
        			var source = $('#summary-options-template');
         		var template = Handlebars.compile(source);
         		var html = template(carSelection);
-        		$('body').append(html);
+        		$('#options-display').html(html);
         		break; 
         	default:
         		var source = $('#vehicle-options-template');
