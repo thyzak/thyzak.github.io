@@ -10,7 +10,9 @@
 <body>
 
   <script id="vehicle-options-template" type="text/x-handlebars-template">
+    {{#each this}}
     <div class="col-md-6 vehicle-option {{feature}}" data-panel="vehicle" data-price="{{price}}" data-option="{{feature}}"></div>
+    {{/each}}
   </script>
 
   <script id="color-options-template" type="text/x-handlebars-template">
