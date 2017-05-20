@@ -41,11 +41,14 @@ $( document ).ready(function() {
     		case 'vehicle':
         		var source = $('#vehicle-options-template').html();
         		var template = Handlebars.compile(source);
-        		var options = {};
+        		var options = [];
 
                 for (i=0; i<vehicleOptions.length; i++) {
-                    options.feature = vehicleOptions[i].choice
-                    options.price = vehicleOptions[i].price
+                    var option = {
+                        feature: vehicleOptions[i].choice,
+                        price: vehicleOptions[i].price
+                    };
+                    options.push(option);
                 }
 
         		var html = template(options);
@@ -85,5 +88,7 @@ $( document ).ready(function() {
         		var source = $('#vehicle-options-template');
         		var template = Handlebars.compile(source);
 		}
-	})
+	});
+
+    $('.active').click();
 });
