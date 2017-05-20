@@ -28,43 +28,50 @@ $( document ).ready(function() {
 	];
 
 	var carSelection = [
-		vehicle: {choice: 'Not Selected', price: 0},
-		color: {choice: 'Not Selected', price: 0},
-		package: {choice: 'Not Selected', price: 0}
+		{vehicle: {choice: 'Not Selected', price: 0}},
+		{color: {choice: 'Not Selected', price: 0}},
+		{package: {choice: 'Not Selected', price: 0}}
 	];
 
 	//click event for nav tabs to display tab html
-	$('.nav nav-tabs nav-justified navigation').children('li').on('click', function(e) {
+	$('.navigation').children('li').on('click', function(e) {
 		e.preventDefault();
 		$('#options-display').empty();
 		switch  ($(this).data('tab')) {
     		case 'vehicle':
-        		var source = $('#vehicle-options-template');
+        		var source = $('#vehicle-options-template').html();
         		var template = Handlebars.compile(source);
-        		var options = for (i=0; i<vehicleOptions.length; i++) {
-        			feature: vehicleOptions[i].choice
-        			price: vehicleOptions[i].price
-        		}
+        		var options = {};
+
+                for (i=0; i<vehicleOptions.length; i++) {
+                    options.feature = vehicleOptions[i].choice
+                    options.price = vehicleOptions[i].price
+                }
+
         		var html = template(options);
         		$('#options-display').html(html);
         		break; 
     		case 'color':
-       			var source = $('#color-options-template');
+       			var source = $('#color-options-template').html();
         		var template = Handlebars.compile(source);
-        		var options = for (i=0; i<colorOptions.length; i++) {
-        			feature: colorOptions[i].choice
-        			price: colorOptions[i].price
-        		}
+        		var options = {};
+
+                for (i=0; i<colorOptions.length; i++) {
+                    options.feature = colorOptions[i].choice
+                    options.price = colorOptions[i].price
+                }
         		var html = template(options);
         		$('#options-display').html(html);
         		break; 
         	case 'package':
-       			var source = $('#package-options-template');
+       			var source = $('#package-options-template').html();
         		var template = Handlebars.compile(source);
-        		var options = for (i=0; i<packageOptions.length; i++) {
-        			feature: packageOptions[i].choice
-        			price: packageOptions[i].price
-        		}
+        		var options = {};
+
+                for (i=0; i<packageOptions.length; i++) {
+                    options.feature = packageOptions[i].choice
+                    options.price = packageOptions[i].price
+                }
         		var html = template(options);
         		$('#options-display').html(html);
         		break;
