@@ -54,39 +54,48 @@ $( document ).ready(function() {
         		var html = template(options);
         		$('#options-display').html(html);
         		break; 
+
     		case 'color':
        			var source = $('#color-options-template').html();
         		var template = Handlebars.compile(source);
-        		var options = {};
+        		var options = [];
 
                 for (i=0; i<colorOptions.length; i++) {
-                    options.feature = colorOptions[i].choice
-                    options.price = colorOptions[i].price
+                	var option = {
+	                    feature: colorOptions[i].choice,
+	                    price: colorOptions[i].price
+                	};
+                	options.push(option);
                 }
+
         		var html = template(options);
         		$('#options-display').html(html);
         		break; 
+
         	case 'package':
        			var source = $('#package-options-template').html();
         		var template = Handlebars.compile(source);
-        		var options = {};
+        		var options = [];
 
                 for (i=0; i<packageOptions.length; i++) {
-                    options.feature = packageOptions[i].choice
-                    options.price = packageOptions[i].price
+                	var option = {
+	                    feature: packageOptions[i].choice,
+	                    price: packageOptions[i].price
+                	};
+                	options.push(option);
                 }
+
         		var html = template(options);
         		$('#options-display').html(html);
         		break;
+
         	case 'summary':
-       			var source = $('#summary-options-template');
+       			var source = $('#summary-options-template').html();
         		var template = Handlebars.compile(source);
         		var html = template(carSelection);
         		$('#options-display').html(html);
         		break; 
-        	default:
-        		var source = $('#vehicle-options-template');
-        		var template = Handlebars.compile(source);
+        	
 		}
 	});
 

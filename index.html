@@ -16,13 +16,17 @@
   </script>
 
   <script id="color-options-template" type="text/x-handlebars-template">
+  {{#each this}}
     <div class="col-xs-3 panel-body color-option {{feature}}" data-panel="color" data-price="{{price}}" data-option="{{feature}}"></div>
+    {{/each}}
   </script>
 
   <script id="package-options-template" type="text/x-handlebars-template">
+  {{#each this}}
     <div class="panel panel-default">
       <div class="panel-heading package-option" data-panel="package"data-price="{{price}}" data-option="{{feature}}">{{feature}}</div>
     </div>
+    {{/each}}
   </script>
 
   <script id="summary-options-template" type="text/x-handlebars-template">
