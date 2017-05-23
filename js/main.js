@@ -99,5 +99,17 @@ $( document ).ready(function() {
 		}
 	});
 
+	//function to update carSelection object w/ user selections
+	function carSelect(feature) {
+		carSelection.push({
+			$(this).data('panel'): {$(this).data('option'), $(this).data('price')}
+		});
+	}
+
+	$('.vehicle-option').on('click', function(e) {
+		e.preventDefault();
+		carSelect(this);
+	})
+
     $('.active').click();
 });
