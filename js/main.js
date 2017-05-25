@@ -101,15 +101,13 @@ $( document ).ready(function() {
 
 	//function to update carSelection object w/ user selections
 	function carSelect(feature) {
-		carSelection.push({
-			$(this).data('panel'): {$(this).data('option'), $(this).data('price')}
-		});
+		$(feature).data('panel', {"option": feature.data('option'), "price": feature.data('price')});
 	}
 
-	$('.vehicle-option').on('click', function(e) {
+	$('#options-display').on('click','div', function(e) {
 		e.preventDefault();
-		carSelect(this);
-	})
+		carSelect($(this));
+	});
 
     $('.active').click();
 });
