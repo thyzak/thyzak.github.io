@@ -101,7 +101,8 @@ $( document ).ready(function() {
 
 	//function to update carSelection object w/ user selections
 	function carSelect(feature) {
-		$(feature).data('panel', {"option": feature.data('option'), "price": feature.data('price')});
+		feature.data('panel', {"option": feature.data('option'), "price": feature.data('price')});
+		console.log(feature.data('panel'));
 	}
 
 	$('#options-display').on('click','div', function(e) {
