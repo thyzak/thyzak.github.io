@@ -101,8 +101,21 @@ $( document ).ready(function() {
 
 	//function to update carSelection object w/ user selections
 	function carSelect(feature) {
-		feature.data('panel', {"option": feature.data('option'), "price": feature.data('price')});
+
+		feature.data('panel', {"panel": feature.data('panel'), "option": feature.data('option'), "price": feature.data('price')});
+
 		console.log(feature.data('panel'));
+
+		if (feature.data('panel').panel === 'vehicle') {
+			carSelection.vehicle.choice = feature.data('panel').option;
+			carSelection.vehicle.price = feature.data('panel').price;
+		} else if (feature.data('panel').panel === 'color') {
+			carSelection.color.choice = feature.data('panel').option;
+			carSelection.color.price = feature.data('panel').price;
+		} else if (feature.data('panel').panel === 'package') {
+			carSelection.package.choice = feature.data('panel').option;
+			carSelection.package.price = feature.data('panel').price;
+		}
 	}
 
 	$('#options-display').on('click','div', function(e) {
