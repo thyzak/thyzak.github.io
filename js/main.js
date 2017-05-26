@@ -27,11 +27,11 @@ $( document ).ready(function() {
 		{choice: 'Rear Camera and LED Positioning Light', price: 200}
 	];
 
-	var carSelection = [
-		{vehicle: {choice: 'Not Selected', price: 0}},
-		{color: {choice: 'Not Selected', price: 0}},
-		{package: {choice: 'Not Selected', price: 0}}
-	];
+	var carSelection = {
+		vehicle: {choice: 'Not Selected', price: 0},
+		color: {choice: 'Not Selected', price: 0},
+		package: {choice: 'Not Selected', price: 0}
+	};
 
 	//click event for nav tabs to display tab html
 	$('.navigation').children('li').on('click', function(e) {
