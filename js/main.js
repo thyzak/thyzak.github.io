@@ -101,26 +101,52 @@ $( document ).ready(function() {
 
 	//function to update carSelection object w/ user selections
 	function carSelect(feature) {
+		console.log(feature);
 
+		//set feature data based on user selection
 		feature.data('panel', {"panel": feature.data('panel'), "option": feature.data('option'), "price": feature.data('price')});
 
 		console.log(feature.data('panel'));
+		var panel = feature.data('panel');
 
-		if (feature.data('panel').panel === 'vehicle') {
-			carSelection.vehicle.choice = feature.data('panel').option;
-			carSelection.vehicle.price = feature.data('panel').price;
-		} else if (feature.data('panel').panel === 'color') {
-			carSelection.color.choice = feature.data('panel').option;
-			carSelection.color.price = feature.data('panel').price;
-		} else if (feature.data('panel').panel === 'package') {
-			carSelection.package.choice = feature.data('panel').option;
-			carSelection.package.price = feature.data('panel').price;
+		//update carSelection w/ feature data
+		if (panel.panel === 'vehicle') {
+			carSelection.vehicle.choice = panel.option;
+			carSelection.vehicle.price = panel.price;
+		} else if (panel.panel === 'color') {
+			carSelection.color.choice = panel.option;
+			carSelection.color.price = panel.price;
+		} else if (panel.panel === 'package') {
+			carSelection.package.choice = panel.option;
+			carSelection.package.price = panel.price;
 		}
+
+		//display vehicle based on user selections
+		if (carSelection.color.choice !== 'Not Selected') {
+			$('.vehicle-display').attr('src', 'assets/' + carSelection.vehicle.choice + '-' + carSelection.color.choice + '.jpg')
+		} else {
+			$('.vehicle-display').attr('src', 'assets/' + carSelection.vehicle.choice + '-black.jpg')
+		}
+
+		//update total cost based on user selections
+		var totalCost = carSelection.vehicle.price + carSelection.color.price + carSelection.package.price;
+
+		function numberWithCommas(x) {
+		    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
+		totalCost = numberWithCommas(totalCost);
+
+
+		$('.cost-display').text('$' + totalCost)
+
 	}
+
+
 
 	$('#options-display').on('click','div', function(e) {
 		e.preventDefault();
 		carSelect($(this));
+
 	});
 
     $('.active').click();
