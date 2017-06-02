@@ -1,3 +1,16 @@
+var config = {
+    apiKey: "AIzaSyCgQRI7p-be9OR452XNZj3rYhJgQ2m94qM",
+    authDomain: "build-a-kia.firebaseapp.com",
+    databaseURL: "https://build-a-kia.firebaseio.com",
+    projectId: "build-a-kia",
+    storageBucket: "build-a-kia.appspot.com",
+    messagingSenderId: "567121021492"
+};
+
+firebase.initializeApp(config);
+
+var database = firebase.database();
+
 $( document ).ready(function() {
 
     //add active class to clicked li, remove from others
@@ -131,13 +144,24 @@ $( document ).ready(function() {
 		//update total cost based on user selections
 		var totalCost = carSelection.vehicle.price + carSelection.color.price + carSelection.package.price;
 
+		//add comma to cost display
 		function numberWithCommas(x) {
 		    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		}
 		totalCost = numberWithCommas(totalCost);
 
-
+		//update cost display w/ total cost
 		$('.cost-display').text('$' + totalCost)
+
+		//update firebase w/ user selections
+		var choicesReference = database.ref('choices');
+
+		choicesReference.push({
+			dbVehicle: carSelection.vehicle.choice,
+			dbColor: carSelection.color.choice,
+			dbPackage: carSelection.package.choice,
+			dbCost: totalCost
+		}) 
 
 	}
 
