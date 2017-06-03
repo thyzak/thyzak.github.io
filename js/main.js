@@ -114,9 +114,10 @@ $( document ).ready(function() {
 
 	//function to update carSelection object w/ user selections
 	function carSelect(feature) {
-		console.log(feature);
 
 		//set feature data based on user selection
+		feature.removeData('panel');
+		
 		feature.data('panel', {"panel": feature.data('panel'), "option": feature.data('option'), "price": feature.data('price')});
 
 		console.log(feature.data('panel'));
