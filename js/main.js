@@ -166,13 +166,32 @@ $( document ).ready(function() {
 
 	}
 
-
-
 	$('#options-display').on('click','div', function(e) {
 		e.preventDefault();
 		carSelect($(this));
 
 	});
+
+      function initMap() {
+      	navigator.geolocation.getCurrentPosition(
+    		function(position) {
+      
+		      var userLocation = {
+		        lat: position.coords.latitude,
+		    	lng: position.coords.longitude
+		  	  };
+      		
+  	  		console.log(userLocation); 
+  	  	
+  	  		var map;
+	        map = new google.maps.Map(document.getElementById('map'), {
+	          center: userLocation,
+	          zoom: 11
+	        });
+	    })
+    }
+
+    initMap();
 
     $('.active').click();
 });

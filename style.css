@@ -3,6 +3,11 @@
   box-sizing: border-box;
 }
 
+#map {
+  height: 300px;
+  margin-bottom: 50px;
+}
+
 .app-container {
   height: 100vh;
 }
