@@ -6,6 +6,20 @@
 #map {
   height: 300px;
   margin-bottom: 50px;
+  margin-right: 8px;
+  width: 66%;
+  float: right;
+}
+
+#directions-panel {
+  height: 300px;
+  float: left;
+  width: 32%;
+  margin-left: 2px;
+  overflow: auto;
+  display: inline;
+  padding: none;
+  margin-top: -10px;
 }
 
 .app-container {

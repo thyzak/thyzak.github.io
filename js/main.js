@@ -1,10 +1,10 @@
 var config = {
-    apiKey: "AIzaSyCgQRI7p-be9OR452XNZj3rYhJgQ2m94qM",
-    authDomain: "build-a-kia.firebaseapp.com",
-    databaseURL: "https://build-a-kia.firebaseio.com",
-    projectId: "build-a-kia",
-    storageBucket: "build-a-kia.appspot.com",
-    messagingSenderId: "567121021492"
+  apiKey: "AIzaSyCgQRI7p-be9OR452XNZj3rYhJgQ2m94qM",
+  authDomain: "build-a-kia.firebaseapp.com",
+  databaseURL: "https://build-a-kia.firebaseio.com",
+  projectId: "build-a-kia",
+  storageBucket: "build-a-kia.appspot.com",
+  messagingSenderId: "567121021492"
 };
 
 firebase.initializeApp(config);
@@ -51,63 +51,63 @@ $( document ).ready(function() {
 		e.preventDefault();
 		$('#options-display').empty();
 		switch  ($(this).data('tab')) {
-    		case 'vehicle':
-        		var source = $('#vehicle-options-template').html();
-        		var template = Handlebars.compile(source);
-        		var options = [];
+  		case 'vehicle':
+      		var source = $('#vehicle-options-template').html();
+      		var template = Handlebars.compile(source);
+      		var options = [];
 
-                for (i=0; i<vehicleOptions.length; i++) {
-                    var option = {
-                        feature: vehicleOptions[i].choice,
-                        price: vehicleOptions[i].price
-                    };
-                    options.push(option);
-                }
+          for (i=0; i<vehicleOptions.length; i++) {
+            var option = {
+              feature: vehicleOptions[i].choice,
+              price: vehicleOptions[i].price
+            };
+            options.push(option);
+          }
 
-        		var html = template(options);
-        		$('#options-display').html(html);
-        		break; 
+      		var html = template(options);
+      		$('#options-display').html(html);
+      		break; 
 
-    		case 'color':
-       			var source = $('#color-options-template').html();
-        		var template = Handlebars.compile(source);
-        		var options = [];
+  		case 'color':
+     			var source = $('#color-options-template').html();
+      		var template = Handlebars.compile(source);
+      		var options = [];
 
-                for (i=0; i<colorOptions.length; i++) {
-                	var option = {
-	                    feature: colorOptions[i].choice,
-	                    price: colorOptions[i].price
-                	};
-                	options.push(option);
-                }
+          for (i=0; i<colorOptions.length; i++) {
+          	var option = {
+              feature: colorOptions[i].choice,
+              price: colorOptions[i].price
+          	};
+          	options.push(option);
+          }
 
-        		var html = template(options);
-        		$('#options-display').html(html);
-        		break; 
+      		var html = template(options);
+      		$('#options-display').html(html);
+      		break; 
 
-        	case 'package':
-       			var source = $('#package-options-template').html();
-        		var template = Handlebars.compile(source);
-        		var options = [];
+      	case 'package':
+     			var source = $('#package-options-template').html();
+      		var template = Handlebars.compile(source);
+      		var options = [];
 
-                for (i=0; i<packageOptions.length; i++) {
-                	var option = {
-	                    feature: packageOptions[i].choice,
-	                    price: packageOptions[i].price
-                	};
-                	options.push(option);
-                }
+          for (i=0; i<packageOptions.length; i++) {
+          	var option = {
+              feature: packageOptions[i].choice,
+              price: packageOptions[i].price
+          	};
+          	options.push(option);
+          }
 
-        		var html = template(options);
-        		$('#options-display').html(html);
-        		break;
+      		var html = template(options);
+      		$('#options-display').html(html);
+      		break;
 
-        	case 'summary':
-       			var source = $('#summary-options-template').html();
-        		var template = Handlebars.compile(source);
-        		var html = template(carSelection);
-        		$('#options-display').html(html);
-        		break; 
+      	case 'summary':
+     			var source = $('#summary-options-template').html();
+      		var template = Handlebars.compile(source);
+      		var html = template(carSelection);
+      		$('#options-display').html(html);
+      		break; 
         	
 		}
 	});
@@ -147,7 +147,7 @@ $( document ).ready(function() {
 
 		//add comma to cost display
 		function numberWithCommas(x) {
-		    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		}
 		totalCost = numberWithCommas(totalCost);
 
@@ -172,26 +172,97 @@ $( document ).ready(function() {
 
 	});
 
-      function initMap() {
-      	navigator.geolocation.getCurrentPosition(
-    		function(position) {
-      
-		      var userLocation = {
-		        lat: position.coords.latitude,
-		    	lng: position.coords.longitude
-		  	  };
-      		
-  	  		console.log(userLocation); 
-  	  	
-  	  		var map;
-	        map = new google.maps.Map(document.getElementById('map'), {
-	          center: userLocation,
-	          zoom: 11
-	        });
-	    })
-    }
-
-    initMap();
-
     $('.active').click();
 });
+
+
+function initMap() {
+  	navigator.geolocation.getCurrentPosition(
+		function(position) {
+  
+      var userLocation = {
+        lat: position.coords.latitude,
+    		lng: position.coords.longitude
+  	  };
+  	
+  	  var map;
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: userLocation,
+        zoom: 11
+      });
+
+      var request = {
+		    location: userLocation,
+		    radius: '15000',
+		    keyword: 'kia'
+		  };
+
+			var service = new google.maps.places.PlacesService(map);
+			service.nearbySearch(request, callback);
+
+			function callback(results, status) {
+			  if (status == google.maps.places.PlacesServiceStatus.OK) {
+			    for (var i = 0; i < results.length; i++) {
+			      var place = results[i];
+			      createMarker(place);
+			      console.log(place);
+			    }
+			  }
+			}
+
+			function createMarker(place) {
+
+				var resultName;
+				var resultAddress;
+				resultName = place.name;
+			  resultAddress = place.vicinity;
+				var contentString = '<div><p>' + resultName + '</br>' + resultAddress + '</p></div>';
+
+				var iWindow = new google.maps.InfoWindow({
+					content: contentString
+				});
+
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location,
+      	});
+
+      	var directionsService = new google.maps.DirectionsService;
+      	var directionsDisplay = new google.maps.DirectionsRenderer;
+      	directionsDisplay.setMap(map);
+      	directionsDisplay.setPanel(document.getElementById('directions-panel'));
+
+      	var doRoute = function() {
+      		makeRoute(directionsService, directionsDisplay);
+      	}
+
+      	function makeRoute(directionsService, directionsDisplay) {
+      		directionsService.route({
+      			origin: userLocation,
+      			destination: place.geometry.location,
+      			travelMode: 'DRIVING'
+      		}, function(response, status) {
+      			if (status === 'OK') {
+      				directionsDisplay.setDirections(response);
+      			} else {
+      				window.alert("Unable to find route due to " + status);
+      			}
+      		});
+      	}
+      	
+
+      	marker.addListener('click', function() {
+					iWindow.open(map, marker);
+					doRoute();
+				})
+      }
+
+      marker = new google.maps.Marker({
+    		position: userLocation,
+    		map: map,
+    		title: 'User Location',
+    		icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+  	  });
+    })
+}
+
